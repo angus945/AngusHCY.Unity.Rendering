@@ -1,6 +1,4 @@
-﻿// Code provided by Null Software - https://nullsoftware.net
-// Please note that shader preview in Inspector can be buggy!!!
-
+﻿
 Shader "AngusHCY/PostProcess/EdgeLine"
 {
     Properties
@@ -219,6 +217,7 @@ Shader "AngusHCY/PostProcess/EdgeLine"
             {
                 float2 uv = input.uv;
                 uv.y = 1.0 - uv.y; // flip Y for UV
+                // return float4(uv, 0, 1);
 
                 float3 worldPos = ReconstructWorldPosition(uv, SampleSceneDepth(uv));
                 float noiseTime = floor(_Time.y * _AnimationSpeed);
@@ -226,6 +225,8 @@ Shader "AngusHCY/PostProcess/EdgeLine"
                 noise = noise * 2.0 - 1.0; // remap to -1 ~ 1
                 noise *= _NoiseIntensity * 0.001f;
                 float2 noisedUV = uv + noise;
+
+                // return float4(worldPos, 1);
 
                 float4 screenColor = SAMPLE_TEXTURE2D_X(_BlitTexture, sampler_BlitTexture, uv);
                 float edgeValue = edgeDetection(noisedUV, _LineThickness);

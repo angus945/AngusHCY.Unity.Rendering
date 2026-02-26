@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using AngusHCY.Unity.Rendering.PostProcessing.Contract;
 
 namespace AngusHCY.Unity.Rendering.PostProcessing
 {

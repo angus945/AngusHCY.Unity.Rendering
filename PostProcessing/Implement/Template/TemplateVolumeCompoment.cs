@@ -1,18 +1,18 @@
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
-using AngusHCY.Unity.Rendering.PostProcessing.Contract;
 
-namespace AngusHCY.Unity.Rendering.PostProcessing.Implement
+namespace AngusHCY.Unity.Rendering.PostProcessing
 {
     [System.Serializable]
-    // [VolumeComponentMenu("AngusHCY/World Height Volumetric Fog")]
+    [VolumeComponentMenu("AngusHCY/Template")]
     public class TemplateVolumeComponent : PostProcessComponentBase
     {
-        public override string shaderPath => "AngusHCY/PostProcess/FullscreenShaderTemplate";
+        public override string materialPath => "AngusHCY_PostProcess_FullscreenShaderTemplate";
         public override RenderPassEvent injectionPoint => RenderPassEvent.BeforeRenderingPostProcessing;
         public override ScriptableRenderPassInput requiredInputs => ScriptableRenderPassInput.Color | ScriptableRenderPassInput.Depth;
 
+        public BoolParameter _EnableEffect = new BoolParameter(false);
         // public ClampedFloatParameter _FogDensity = new ClampedFloatParameter(0f, 0f, 1f);
         // public ColorParameter _FogColor = new ColorParameter(new Color(1f, 1f, 1f, 1f), false, false, true);
         // public FloatParameter _FogBottomHeight = new FloatParameter(0f);
@@ -31,7 +31,7 @@ namespace AngusHCY.Unity.Rendering.PostProcessing.Implement
             // isActive |= _FogColor.value.a > 0f;
             // isActive |= _FogDensity.value > 0f;
             // return isActive;
-            return false;
+            return _EnableEffect.value;
         }
 
         public override void SetupMaterialProperties(Material material)

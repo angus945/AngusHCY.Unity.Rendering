@@ -1,15 +1,14 @@
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
-using AngusHCY.Unity.Rendering.PostProcessing.Contract;
 
-namespace AngusHCY.Unity.Rendering.PostProcessing.Implement
+namespace AngusHCY.Unity.Rendering.PostProcessing
 {
     [System.Serializable]
     [VolumeComponentMenu("AngusHCY/ScreenSpaceCavity")]
     public class ScreenSpaceCavityVolumeComponent : PostProcessComponentBase
     {
-        public override string shaderPath => "Shader Graphs/CavityShader";
+        public override string materialPath => "cavifree-main-CavityMaterial";
         public override RenderPassEvent injectionPoint => RenderPassEvent.BeforeRenderingPostProcessing;
         public override ScriptableRenderPassInput requiredInputs => ScriptableRenderPassInput.Color | ScriptableRenderPassInput.Depth | ScriptableRenderPassInput.Normal;
 

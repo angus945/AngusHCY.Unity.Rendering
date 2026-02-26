@@ -3,21 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
-using AngusHCY.Unity.Rendering.PostProcessing.Contract;
 
 namespace AngusHCY.Unity.Rendering.PostProcessing
 {
-    public class PostProcessFeature : ScriptableRendererFeature
+    public class AngusHCYPostProcessFeature : ScriptableRendererFeature
     {
         [SerializeField] bool logDetectedComponents = true;
         List<AngusHCYPostProcessPass> createdPasses = new List<AngusHCYPostProcessPass>();
-        [SerializeField] List<Material> cachedMaterials = new List<Material>();
+        [SerializeField] List<Material> instancedMaterials = new List<Material>();
+
+        Dictionary<string, bool> passActiveStatus = new Dictionary<string, bool>();
 
         public override void Create()
         {
             VolumeStack stack = VolumeManager.instance.stack;
             createdPasses.Clear();
-            cachedMaterials.Clear();
+            instancedMaterials.Clear();
 
             Type[] allComponents = PostProcessComponentRegistry.GetAllComponents();
             string debugMsg = string.Empty;
@@ -26,55 +27,70 @@ namespace AngusHCY.Unity.Rendering.PostProcessing
                 PostProcessComponentBase component = stack.GetComponent(type) as PostProcessComponentBase;
                 if (component != null)
                 {
-                    string shaderPath = component.shaderPath;
-                    Shader shader = Shader.Find(shaderPath);
-                    if (shader == null)
+                    Material loadMaterial = Resources.Load<Material>(component.materialPath);
+                    if (loadMaterial == null)
                     {
-                        Debug.LogError($"Shader not found at path: {shaderPath}, required by PostProcessComponent {type.Name}.");
+                        Debug.LogError($"Material not found at path: {component.materialPath}, required by PostProcessComponent {type.Name}.");
                         continue;
                     }
-                    AlwaysIncludedShaderUtility.AddShaderToAlwaysIncluded(shader);
-                    Material material = new Material(shader);
+
+                    Material cloneMaterial = new Material(loadMaterial);
                     RenderPassEvent eventPoint = component.injectionPoint;
                     ScriptableRenderPassInput requiredInputs = component.requiredInputs;
-                    AngusHCYPostProcessPass pass = new AngusHCYPostProcessPass(type, eventPoint, requiredInputs, material);
+                    AngusHCYPostProcessPass pass = new AngusHCYPostProcessPass(type, eventPoint, requiredInputs, cloneMaterial);
 
-                    cachedMaterials.Add(material);
+                    instancedMaterials.Add(cloneMaterial);
                     createdPasses.Add(pass);
-                    debugMsg += $"- {type.Name}, Shader: {shaderPath}, Event: {eventPoint}\n";
+                    debugMsg += $"- {type.Name}, Material: {component.materialPath}, Event: {eventPoint}\n";
                 }
             }
 
             debugMsg = $"Create Angus HCY PostProcess Feature, found: {allComponents.Length}, created: {createdPasses.Count}\n" + debugMsg;
             if (logDetectedComponents)
-                Debug.Log(debugMsg);
-
+            {
+                // Debug.Log(debugMsg);
+                Debug.LogError(debugMsg);
+            }
         }
 
-        List<(int order, AngusHCYPostProcessPass pass)> activePasses = new List<(int, AngusHCYPostProcessPass)>();
         public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
         {
-            activePasses.Clear();
-
             VolumeStack stack = VolumeManager.instance.stack;
 
-            foreach (var pass in createdPasses)
+            foreach (AngusHCYPostProcessPass pass in createdPasses)
             {
-                var component = stack.GetComponent(pass.componentType) as PostProcessComponentBase;
+                if (passActiveStatus.TryGetValue(pass.componentType.Name, out bool isActive) && !isActive)
+                {
+                    continue; // Skip this pass if it's marked as inactive
+                }
+
+                PostProcessComponentBase component = stack.GetComponent(pass.componentType) as PostProcessComponentBase;
                 if (pass.IsValid() && component != null && component.IsActive() && component.active)
                 {
-                    int order = component.custom_order.value;
-                    activePasses.Add((order, pass));
+                    // int order = component.custom_order.value;
+                    renderer.EnqueuePass(pass);
                 }
             }
+        }
 
-            // 依 custom_order 排序
-            activePasses.Sort((a, b) => a.order.CompareTo(b.order));
-
-            // 依序 enqueue
-            foreach (var item in activePasses)
+        public string[] GetCreatedPassNames()
+        {
+            string[] names = new string[createdPasses.Count];
+            for (int i = 0; i < createdPasses.Count; i++)
             {
-                renderer.EnqueuePass(item.pass);
+                names[i] = createdPasses[i].componentType.Name;
+            }
+            return names;
+        }
+        public void TogglePassActive(string passName, bool isActive)
+        {
+            foreach (var pass in createdPasses)
+            {
+                if (pass.componentType.Name == passName)
+                {
+                    passActiveStatus[passName] = isActive;
+                    return;
+                }
             }
         }
 

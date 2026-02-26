@@ -1,15 +1,14 @@
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
-using AngusHCY.Unity.Rendering.PostProcessing.Contract;
 
-namespace AngusHCY.Unity.Rendering.PostProcessing.Implement
+namespace AngusHCY.Unity.Rendering.PostProcessing
 {
     [System.Serializable]
     [VolumeComponentMenu("AngusHCY/World Height Volumetric Fog")]
     public class WorldHeightVolumetricFogVolumeComponent : PostProcessComponentBase
     {
-        public override string shaderPath => "AngusHCY/PostProcess/WorldHeightVolumetricFog";
+        public override string materialPath => "AngusHCY_PostProcess_WorldHeightVolumetricFog";
         public override RenderPassEvent injectionPoint => RenderPassEvent.BeforeRenderingPostProcessing;
         public override ScriptableRenderPassInput requiredInputs => ScriptableRenderPassInput.Color | ScriptableRenderPassInput.Depth;
 

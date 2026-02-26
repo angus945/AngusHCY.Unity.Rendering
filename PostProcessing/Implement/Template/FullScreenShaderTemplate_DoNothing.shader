@@ -1,12 +1,9 @@
 // Code provided by Null Software - https://nullsoftware.net
 // Please note that shader preview in Inspector can be buggy!!!
 
-Shader "AngusHCY/PostProcess/OilPaintingShader"
+Shader "AngusHCY/PostProcess/FullscreenShaderTemplate_DoNothing"
 {
-    Properties
-    {
-        _KernelSize ("Kernel Size (N)", Int) = 7
-    }
+    Properties { }
     SubShader
     {
         Tags { "RenderPipeline" = "UniversalRenderPipeline" "RenderType" = "Transparent" "Queue" = "Transparent" }
@@ -87,81 +84,34 @@ Shader "AngusHCY/PostProcess/OilPaintingShader"
                 return output;
             }
 
-            int _KernelSize;
-            struct region
-            {
-                float3 mean;
-                float variance;
-            };
-
-            region calcRegion(int2 lower, int2 upper, int samples, float2 uv)
-            {
-                region r;
-
-                float3 sum = 0.0;
-                float3 squareSum = 0.0;
-                float2 texelSize = 1.0 / _ScreenSize.xy;
-
-                for (int x = lower.x; x <= upper.x; ++x)
-                {
-                    for (int y = lower.y; y <= upper.y; ++y)
-                    {
-                        float2 offset = float2(texelSize.x * x, texelSize.y * y);
-                        float3 tex = SAMPLE_TEXTURE2D_X(_BlitTexture, sampler_BlitTexture, uv + offset);
-
-                        sum += tex;
-                        squareSum += tex * tex;
-                    }
-                }
-
-                r.mean = sum / samples;
-
-                float3 variance = abs((squareSum / samples) - (r.mean * r.mean));
-                r.variance = length(variance);
-
-                return r;
-            }
-            
 
             float4 frag(Varyings input) : SV_Target
             {
-                float2 uv = float2(input.uv.x, 1.0 - input.uv.y); // flip Y for UV
-                float3 tex = SAMPLE_TEXTURE2D_X(_BlitTexture, sampler_BlitTexture, uv);
+                float2 uv = input.uv;
+                uv.y = 1.0 - uv.y; // flip Y for UV
 
-                int upper = (_KernelSize - 1) / 2;
-                int lower = -upper;
+                // 取螢幕顏色
+                float4 color = SAMPLE_TEXTURE2D_X(_BlitTexture, sampler_BlitTexture, uv);
+                return color;
 
-                int samples = (upper + 1) * (upper + 1);
+                // 取 depth（0~1 非線性，轉成線性 0~1）
+                float rawDepth = SampleSceneDepth(uv);
+                float depth01 = Linear01Depth(rawDepth, _ZBufferParams);
 
-                region regionA = calcRegion(int2(lower, lower), int2(0, 0), samples, uv);
-                region regionB = calcRegion(int2(0, lower), int2(upper, 0), samples, uv);
-                region regionC = calcRegion(int2(lower, 0), int2(0, upper), samples, uv);
-                region regionD = calcRegion(int2(0, 0), int2(upper, upper), samples, uv);
+                // 取 world normal
+                float3 normalWS = SampleSceneNormals(uv);
+                float3 absNormalWS = abs(normalWS);
 
-                float3 col = regionA.mean;
-                float minVar = regionA.variance;
+                // 依需求可轉到 view space 等其他空間
+                // float3 normalVS = TransformWorldToViewDir(normalWS);
 
-                float testVal;
+                // Debug：把法線壓到 0~1 範圍顯示
 
-                // Test region B.
-                testVal = step(regionB.variance, minVar);
-                col = lerp(col, regionB.mean, testVal);
-                minVar = lerp(minVar, regionB.variance, testVal);
+                // 可以順便把 depth 也混進去玩，例如做霧、暗角、描邊等
+                // 這裡先只示範：在原畫面與法線可視化之間插值
+                // float3 result = lerp(color.rgb, debugNormal, _Intensity);
 
-                // Test region C.
-                testVal = step(regionC.variance, minVar);
-                col = lerp(col, regionC.mean, testVal);
-                minVar = lerp(minVar, regionC.variance, testVal);
-
-                // Text region D.
-                testVal = step(regionD.variance, minVar);
-                col = lerp(col, regionD.mean, testVal);
-
-                return float4(col, 1.0);
-
-                
-                // return float4(tex, 1.0);
-
+                return float4(absNormalWS, 1.0);
             }
             ENDHLSL
         }

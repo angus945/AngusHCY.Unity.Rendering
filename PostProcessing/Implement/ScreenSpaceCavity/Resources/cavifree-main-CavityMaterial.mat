@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: AngusHCY_PostProcess_OilPaintingShader
-  m_Shader: {fileID: 4800000, guid: da47f504400a9dc4ba181859c9c6e97d, type: 3}
+  m_Name: cavifree-main-CavityMaterial
+  m_Shader: {fileID: -6465566751694194690, guid: b53a886fb77dcd94aaf6fa86b8226f62, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -22,10 +22,26 @@ Material:
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
-    m_TexEnvs: []
+    m_TexEnvs:
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _KernelSize: 7
+    - _Exponent: 2.5
+    - _Intensity: 3.55
+    - _Multiplier: 0.6
+    - _Radius: 1
+    - _Sharpness: 0.9
     m_Colors: []
   m_BuildTextureStacks: []
   m_AllowLocking: 1
