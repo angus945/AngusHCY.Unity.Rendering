@@ -80,6 +80,8 @@ inline float2 Angus_ApplyWorldPosNoise(
     return uv + noise;
 }
 
+// Mapping to Unity ShaderGraph Custom Function
+
 void WorldPosUVNoise_float(
     float2 uv,
     float3 worldPos,
