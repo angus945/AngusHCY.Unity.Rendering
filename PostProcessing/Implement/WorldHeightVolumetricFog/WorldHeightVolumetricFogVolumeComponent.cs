@@ -26,9 +26,9 @@ namespace AngusHCY.Unity.Rendering.PostProcessing
 
         public override bool IsActive()
         {
-            bool isActive = false;
-            isActive |= _FogColor.value.a > 0f;
-            isActive |= _FogDensity.value > 0f;
+            bool isActive = true;
+            isActive &= _FogColor.value.a > 0f;
+            isActive &= _FogDensity.value > 0f;
             return isActive;
         }
 

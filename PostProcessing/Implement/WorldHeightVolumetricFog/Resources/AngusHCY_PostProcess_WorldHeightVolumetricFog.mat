@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: AngusHCY_PostProcess_WorldHeightVolumetricFog
-  m_Shader: {fileID: -6465566751694194690, guid: 3a44c96f447dcb249a371fabf6606675, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 447fecdc48a4b1a4d8511e700e7f4e74, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -38,7 +38,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _FogBottomHeight: 0
-    - _FogDensity: 0
+    - _FogDensity: 0.162
     - _FogFadeoutRange: 5
     - _HeightExponent: 1
     m_Colors:

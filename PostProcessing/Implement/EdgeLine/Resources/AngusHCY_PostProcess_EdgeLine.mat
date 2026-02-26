@@ -37,11 +37,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AnimationSpeed: 3.37
-    - _LineThickness: 1
-    - _NoiseIntensity: 6.4
-    - _NoiseScale: 3.76
+    - _AnimationSpeed: 1.5
+    - _LineThickness: 2
+    - _NoiseIntensity: 1
+    - _NoiseScale: 3
     m_Colors:
-    - _LineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _LineColor: {r: 0, g: 0, b: 0, a: 0.70980394}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

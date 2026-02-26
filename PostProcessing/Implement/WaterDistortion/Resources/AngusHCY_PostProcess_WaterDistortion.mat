@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: AngusHCY_PostProcess_WaterDistortion
-  m_Shader: {fileID: -6465566751694194690, guid: 04c99061577b2b4488485ad346e87f2b, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 0a455c0c501673b43978eb74ffbd87ed, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -43,7 +43,7 @@ Material:
     m_Floats:
     - _FlowOffset: 20
     - _FlowSpeed: 1
-    - _FlowStrength: 0.014
+    - _FlowStrength: 0.0355
     m_Colors: []
   m_BuildTextureStacks: []
   m_AllowLocking: 1

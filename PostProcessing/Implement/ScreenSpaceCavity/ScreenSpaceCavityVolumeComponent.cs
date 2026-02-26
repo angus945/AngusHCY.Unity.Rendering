@@ -27,9 +27,9 @@ namespace AngusHCY.Unity.Rendering.PostProcessing
 
         public override bool IsActive()
         {
-            bool isActive = false;
-            isActive |= _Intensity.value > 0f;
-            isActive |= _Radius.value > 0f;
+            bool isActive = true;
+            isActive &= _Intensity.value > 0f;
+            isActive &= _Radius.value > 0f;
             return isActive;
         }
 

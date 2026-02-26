@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
+// TODO list active component
+// TODO toggle component on/off
+// TODO material shader error checking
 namespace AngusHCY.Unity.Rendering.PostProcessing
 {
     public class AngusHCYPostProcessFeature : ScriptableRendererFeature
@@ -34,12 +37,12 @@ namespace AngusHCY.Unity.Rendering.PostProcessing
                         continue;
                     }
 
-                    Material cloneMaterial = new Material(loadMaterial);
+                    // Material cloneMaterial = new Material(loadMaterial);
                     RenderPassEvent eventPoint = component.injectionPoint;
                     ScriptableRenderPassInput requiredInputs = component.requiredInputs;
-                    AngusHCYPostProcessPass pass = new AngusHCYPostProcessPass(type, eventPoint, requiredInputs, cloneMaterial);
+                    AngusHCYPostProcessPass pass = new AngusHCYPostProcessPass(type, eventPoint, requiredInputs, loadMaterial);
 
-                    instancedMaterials.Add(cloneMaterial);
+                    instancedMaterials.Add(loadMaterial);
                     createdPasses.Add(pass);
                     debugMsg += $"- {type.Name}, Material: {component.materialPath}, Event: {eventPoint}\n";
                 }
@@ -48,8 +51,8 @@ namespace AngusHCY.Unity.Rendering.PostProcessing
             debugMsg = $"Create Angus HCY PostProcess Feature, found: {allComponents.Length}, created: {createdPasses.Count}\n" + debugMsg;
             if (logDetectedComponents)
             {
-                // Debug.Log(debugMsg);
-                Debug.LogError(debugMsg);
+                Debug.Log(debugMsg);
+                // Debug.LogError(debugMsg);
             }
         }
 

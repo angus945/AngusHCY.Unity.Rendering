@@ -26,10 +26,9 @@ namespace AngusHCY.Unity.Rendering.PostProcessing
 
         public override bool IsActive()
         {
-            bool isActive = false;
-            isActive |= _LineThickness.value > 0;
-            isActive |= _LineColor.value.a > 0f;
-            isActive |= _NoiseIntensity.value > 0f;
+            bool isActive = true;
+            isActive &= _LineThickness.value > 0;
+            isActive &= _LineColor.value.a > 0f;
             return isActive;
         }
 

@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: CavityMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: b53a886fb77dcd94aaf6fa86b8226f62, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 502b93b6bc8074d449fc89b1bee6f619, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []

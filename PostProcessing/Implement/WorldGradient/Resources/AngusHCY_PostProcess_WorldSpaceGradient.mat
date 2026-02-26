@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: AngusHCY_PostProcess_WorldSpaceGradient
-  m_Shader: {fileID: -6465566751694194690, guid: 52c54f8d4905fa94ca1963461316df47, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 664141186eb9bac4ebe87c124c151ebf, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -41,7 +41,7 @@ Material:
     - _GradientStartHeight: 0
     - _Power: 1
     m_Colors:
-    - _BottomColor: {r: 1, g: 1, b: 1, a: 0}
+    - _BottomColor: {r: 0, g: 0, b: 0, a: 0}
     - _BottomOverlayColor: {r: 1, g: 1, b: 1, a: 0}
     - _GradientAxis: {r: 0, g: 1, b: 0, a: 0}
     - _TopColor: {r: 1, g: 1, b: 1, a: 0}

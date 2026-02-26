@@ -34,9 +34,6 @@
             "m_Id": "86bbad8c1ea84df4b4ea3f19af88d770"
         },
         {
-            "m_Id": "08fabd0c13a34e3bbf330ae25c44226f"
-        },
-        {
             "m_Id": "5b765470c6574f99b3d093b1f9d2e09d"
         },
         {
@@ -113,6 +110,9 @@
         },
         {
             "m_Id": "d262bc629b614026a7be48e403cd3910"
+        },
+        {
+            "m_Id": "e4f5a69d501447aa86b0de9a02011409"
         }
     ],
     "m_GroupDatas": [],
@@ -158,34 +158,6 @@
                     "m_Id": "5b765470c6574f99b3d093b1f9d2e09d"
                 },
                 "m_SlotId": 0
-            }
-        },
-        {
-            "m_OutputSlot": {
-                "m_Node": {
-                    "m_Id": "08fabd0c13a34e3bbf330ae25c44226f"
-                },
-                "m_SlotId": 2
-            },
-            "m_InputSlot": {
-                "m_Node": {
-                    "m_Id": "064044946f514c3b8d5db69fee13b917"
-                },
-                "m_SlotId": 0
-            }
-        },
-        {
-            "m_OutputSlot": {
-                "m_Node": {
-                    "m_Id": "08fabd0c13a34e3bbf330ae25c44226f"
-                },
-                "m_SlotId": 2
-            },
-            "m_InputSlot": {
-                "m_Node": {
-                    "m_Id": "07c6e03e0231440d898b9fac1cb8443b"
-                },
-                "m_SlotId": 1
             }
         },
         {
@@ -471,6 +443,34 @@
         {
             "m_OutputSlot": {
                 "m_Node": {
+                    "m_Id": "e4f5a69d501447aa86b0de9a02011409"
+                },
+                "m_SlotId": 2
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "064044946f514c3b8d5db69fee13b917"
+                },
+                "m_SlotId": 0
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "e4f5a69d501447aa86b0de9a02011409"
+                },
+                "m_SlotId": 2
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "07c6e03e0231440d898b9fac1cb8443b"
+                },
+                "m_SlotId": 1
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
                     "m_Id": "edc5a4e549204fb7a22b3503298ecdd8"
                 },
                 "m_SlotId": 1
@@ -691,44 +691,6 @@
     "m_CustomColors": {
         "m_SerializableColors": []
     }
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.SubGraphNode",
-    "m_ObjectId": "08fabd0c13a34e3bbf330ae25c44226f",
-    "m_Group": {
-        "m_Id": ""
-    },
-    "m_Name": "ScreenPosToWorld",
-    "m_DrawState": {
-        "m_Expanded": true,
-        "m_Position": {
-            "serializedVersion": "2",
-            "x": -1437.0,
-            "y": 613.0000610351563,
-            "width": 208.0,
-            "height": 278.9998779296875
-        }
-    },
-    "m_Slots": [
-        {
-            "m_Id": "264e8bd077be4d5c9f8d513921a02ad8"
-        }
-    ],
-    "synonyms": [],
-    "m_Precision": 0,
-    "m_PreviewExpanded": true,
-    "m_DismissedVersion": 0,
-    "m_PreviewMode": 0,
-    "m_CustomColors": {
-        "m_SerializableColors": []
-    },
-    "m_SerializedSubGraph": "{\n    \"subGraph\": {\n        \"fileID\": -5475051401550479605,\n        \"guid\": \"0a424270a45218e418ca0dcc6c9a43e1\",\n        \"type\": 3\n    }\n}",
-    "m_PropertyGuids": [],
-    "m_PropertyIds": [],
-    "m_Dropdowns": [],
-    "m_DropdownSelectedEntries": []
 }
 
 {
@@ -971,29 +933,6 @@
     "m_StageCapability": 3,
     "m_Value": 1.0,
     "m_DefaultValue": 1.0,
-    "m_Labels": []
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Vector3MaterialSlot",
-    "m_ObjectId": "264e8bd077be4d5c9f8d513921a02ad8",
-    "m_Id": 2,
-    "m_DisplayName": "_WorldPos",
-    "m_SlotType": 1,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "_WorldPos",
-    "m_StageCapability": 2,
-    "m_Value": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
-    },
-    "m_DefaultValue": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
-    },
     "m_Labels": []
 }
 
@@ -1900,7 +1839,7 @@
     },
     "m_SourceType": 0,
     "m_FunctionName": "SimpleHeightFogNonLinear",
-    "m_FunctionSource": "22cee19d6d2de774881e768a93f59fd8",
+    "m_FunctionSource": "eb43797ba2ad3bb438624779c647713f",
     "m_FunctionSourceUsePragmas": true,
     "m_FunctionBody": "Enter function body here..."
 }
@@ -3199,6 +3138,29 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector3MaterialSlot",
+    "m_ObjectId": "d6f893a65e494ac289bcde1e509d9e3d",
+    "m_Id": 2,
+    "m_DisplayName": "_WorldPos",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "_WorldPos",
+    "m_StageCapability": 2,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.DynamicVectorMaterialSlot",
     "m_ObjectId": "dd4d02b299584139b9af9fa5a03c0343",
     "m_Id": 2,
@@ -3272,6 +3234,44 @@
         "z": 0.0
     },
     "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.SubGraphNode",
+    "m_ObjectId": "e4f5a69d501447aa86b0de9a02011409",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "ScreenPosToWorld",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -1476.9998779296875,
+            "y": 618.0,
+            "width": 208.0,
+            "height": 278.99993896484377
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "d6f893a65e494ac289bcde1e509d9e3d"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_SerializedSubGraph": "{\n    \"subGraph\": {\n        \"fileID\": -5475051401550479605,\n        \"guid\": \"a3e39ee0b76ad424f86acdfbfaff8b55\",\n        \"type\": 3\n    }\n}",
+    "m_PropertyGuids": [],
+    "m_PropertyIds": [],
+    "m_Dropdowns": [],
+    "m_DropdownSelectedEntries": []
 }
 
 {

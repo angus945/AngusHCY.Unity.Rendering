@@ -24,9 +24,9 @@ namespace AngusHCY.Unity.Rendering.PostProcessing
 
         public override bool IsActive()
         {
-            bool active = false;
-            active |= _FlowMapTexture.value != null;
-            active |= _FlowStrength.value > 0;
+            bool active = true;
+            active &= _FlowMapTexture.value != null;
+            active &= _FlowStrength.value > 0;
             return active;
         }
         public override void SetupMaterialProperties(Material material)

@@ -35,11 +35,14 @@ namespace AngusHCY.Unity.Rendering.PostProcessing
             VolumeStack stack = VolumeManager.instance.stack;
             PostProcessComponentBase component = stack.GetComponent(componentType) as PostProcessComponentBase;
 
-            if (component.IsActive())
+            if (!component.IsActive())
             {
-                component.SetupMaterialProperties(material);
+                return;
             }
 
+            // Debug.Log($"Recording render pass for component: {componentType.Name}");
+
+            component.SetupMaterialProperties(material);
             UniversalResourceData resourceData = frameData.Get<UniversalResourceData>();
             if (resourceData.isActiveTargetBackBuffer)
             {
@@ -54,11 +57,8 @@ namespace AngusHCY.Unity.Rendering.PostProcessing
 
             TextureHandle destination = renderGraph.CreateTexture(destinationDesc);
 
-            if (component.IsActive())
-            {
-                RenderGraphUtils.BlitMaterialParameters para = new(source, destination, material, 0);
-                renderGraph.AddBlitPass(para, passName: passName);
-            }
+            RenderGraphUtils.BlitMaterialParameters para = new(source, destination, material, 0);
+            renderGraph.AddBlitPass(para, passName: passName);
 
             resourceData.cameraColor = destination;
         }

@@ -12,6 +12,7 @@ namespace AngusHCY.Unity.Rendering.PostProcessing
         public override RenderPassEvent injectionPoint => RenderPassEvent.BeforeRenderingPostProcessing;
         public override ScriptableRenderPassInput requiredInputs => ScriptableRenderPassInput.Color | ScriptableRenderPassInput.Depth;
 
+        public BoolParameter _Active = new BoolParameter(false);
         public ColorParameter _TopColor = new ColorParameter(new Color(1f, 1f, 1f, 0f), false, false, true);
         public ColorParameter _BottomColor = new ColorParameter(new Color(0, 0, 0, 0f), false, false, true);
         public ColorParameter _TopOverlayColor = new ColorParameter(new Color(1f, 1f, 1f, 0f), false, true, true);
@@ -30,11 +31,8 @@ namespace AngusHCY.Unity.Rendering.PostProcessing
 
         public override bool IsActive()
         {
-            bool isActive = false;
-            isActive |= _TopColor.value != Color.white;
-            isActive |= _BottomColor.value != Color.white;
-            isActive |= _TopOverlayColor.value.a > 0f;
-            isActive |= _BottomOverlayColor.value.a > 0f;
+            bool isActive = true;
+            isActive &= _Active.value;
             return isActive;
         }
         public override void SetupMaterialProperties(Material material)
